@@ -16,7 +16,7 @@ const serial = (onData) => {
     console.log('Opened seriaport', portName)
 
     sp.on('data', (data) => {
-      console.log('Serial data received: ' + data)
+      console.log('Serial data received', data)
       onData(null, data)
     })
   })

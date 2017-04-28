@@ -6,7 +6,10 @@ const main = () => {
     if (err) {
       console.error(err)
     }
-    serial((liveData) => {
+    serial((err, liveData) => {
+      if (err) {
+        console.log(err)
+      }
       broadcast(socket, liveData)
     })
 

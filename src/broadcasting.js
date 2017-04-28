@@ -13,6 +13,7 @@ const createSocket = (callback) => {
 }
 
 const broadcast = (socket, message) => {
+  console.log('Broadcasting', typeof message, message)
   socket.send(message, broadcastPort, broadcastAddress, (err) => {
     if (err) {
       console.error(err)
