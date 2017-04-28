@@ -2,8 +2,6 @@ FROM resin/raspberrypi3-node:7.8
 
 COPY ./install /root/install
 
-RUN ls ~
-
 RUN chmod +x ~/install/install.sh && ~/install/install.sh
 
 WORKDIR /root/src
