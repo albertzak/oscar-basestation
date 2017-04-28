@@ -1,31 +1,22 @@
 const dgram = require('dgram')
-const broadcast = () => {
-  const socket = dgram.createSocket('udp4', () => {
-    const testMessage = '[hello world] pid: ' + process.pid
-    const broadcastAddress = '255.255.255.255'
-    const broadcastPort = 5555
 
-    socket.setBroadcast(true)
-    socket.bind(broadcastPort, '0.0.0.0')
+const broadcastAddress = '255.255.255.255'
+const broadcastPort = 5555
 
-    socket.on('message', function (data, rinfo) {
-      console.log('Message received from ', rinfo.address, ' : ', data.toString())
-    })
-
-    setInterval(function () {
-      socket.send(new Buffer(testMessage),
-        0,
-        testMessage.length,
-          broadcastPort,
-          broadcastAddress,
-          function (err) {
-            if (err) console.log(err)
-
-            console.log('Message sent')
-          }
-        )
-    }, 1000)
+const createSocket = (callback) => {
+  const socket = dgram.createSocket('udp4')
+  socket.setBroadcast(true)
+  socket.bind(broadcastPort, '0.0.0.0', () => {
+    callback(null, socket)
   })
 }
 
-module.exports = { broadcast }
+const broadcast = (socket, message) => {
+  socket.send(message, broadcastPort, broadcastAddress, (err) => {
+    if (err) {
+      console.error(err)
+    }
+  })
+}
+
+module.exports = { createSocket, broadcast }
