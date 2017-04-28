@@ -4,6 +4,8 @@ COPY install /root/install
 
 RUN chmod +x ~/install/install.sh && ~/install/install.sh
 
+RUN apt-get -y update && apt-get install -y minicom
+
 WORKDIR /root/src
 
 # Copy only dependencies now to use cache when rebuilding
