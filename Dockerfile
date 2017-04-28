@@ -18,6 +18,7 @@ RUN npm install
 
 COPY src .
 
+ENV INITSYSTEM=on
 RUN chmod +x /root/src/udevd.sh
 CMD ["/root/src/udevd.sh"]
 
