@@ -5,8 +5,9 @@ const broadcastPort = 5555
 
 const createSocket = (callback) => {
   const socket = dgram.createSocket('udp4')
-  socket.setBroadcast(true)
   socket.bind(broadcastPort, '0.0.0.0', () => {
+    socket.setBroadcast(true)
+
     callback(null, socket)
   })
 }
