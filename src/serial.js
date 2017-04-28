@@ -1,6 +1,6 @@
 const Serialport = require('serialport')
 
-const portName = '/dev/ttyS0'  // This is the standard Raspberry Pi Serial port
+const portName = process.env.XBEE_SERIAL_PORT || '/dev/ttyS0'  // This is the standard Raspberry Pi Serial port
 
 const serial = (onData) => {
   const sp = new Serialport(portName, {
