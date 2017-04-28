@@ -5,7 +5,6 @@ const portName = '/dev/ttyAMA0'  // This is the standard Raspberry Pi Serial por
 const serial = (onData) => {
   const sp = new Serialport(portName, {
     baudRate: 9600,
-    dataBits: 16,
     parity: 'none',
     stopBits: 1,
     flowControl: false
