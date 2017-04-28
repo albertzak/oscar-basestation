@@ -1,14 +1,18 @@
 const { createSocket, broadcast } = require('./broadcasting')
+const { serial } = require('./serial')
 
 const main = () => {
   createSocket((err, socket) => {
     if (err) {
       console.error(err)
     }
+    serial((liveData) => {
+      broadcast(socket, liveData)
+    })
 
     setInterval(() => {
       console.log('Hello World 🦄')
-      broadcast(socket, '123,456,789,10,11,12')
+      broadcast(socket, 'ping')
     }, 1000)
   })
 }
