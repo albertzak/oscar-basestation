@@ -18,7 +18,6 @@ export INFLUX_DOWNLOAD_URL=https://dl.influxdata.com/influxdb/releases/influxdb-
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 pushd $DIR
 
-bash ./yarn.sh
 bash ./influx.sh
 
 

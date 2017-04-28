@@ -1,6 +1,6 @@
 FROM node:7.8
 
-COPY ./install /root/install
+COPY install /root/install
 
 RUN chmod +x ~/install/install.sh && ~/install/install.sh
 
@@ -10,7 +10,9 @@ WORKDIR /root/src
 COPY src/package.json .
 COPY src/yarn.lock .
 
-RUN yarn
+ENV NPM_CONFIG_LOGLEVEL=warn
+ENV NPM_CONFIG_COLOR=false
+RUN npm install
 
 COPY src .
 
