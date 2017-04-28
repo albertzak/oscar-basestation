@@ -2,7 +2,7 @@ const dgram = require('dgram')
 const broadcast = () => {
   const socket = dgram.createSocket('udp4', () => {
     const testMessage = '[hello world] pid: ' + process.pid
-    const broadcastAddress = '192.168.243.93'
+    const broadcastAddress = '255.255.255.255'
     const broadcastPort = 5555
 
     socket.setBroadcast(true)
