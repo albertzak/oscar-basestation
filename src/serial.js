@@ -3,12 +3,7 @@ const Serialport = require('serialport')
 const portName = process.env.XBEE_SERIAL_PORT || '/dev/ttyS0'  // This is the standard Raspberry Pi Serial port
 
 const serial = (onData) => {
-  const sp = new Serialport(portName, {
-    baudRate: 9600,
-    parity: 'none',
-    stopBits: 1,
-    flowControl: false
-  })
+  const sp = new Serialport(portName)
 
   console.log('Opening seriaport', portName)
 
