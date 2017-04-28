@@ -16,4 +16,7 @@ RUN npm install
 
 COPY src .
 
-CMD ["/root/src/node_modules/.bin/pm2-docker", "/root/src/start.js"]
+RUN chmod +x /root/src/udevd.sh
+CMD ["/root/src/udevd.sh"]
+
+ENTRYPOINT ["/root/src/node_modules/.bin/pm2-docker", "/root/src/start.js"]

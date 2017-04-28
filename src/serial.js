@@ -10,11 +10,13 @@ const serial = (onData) => {
     flowControl: false
   })
 
+  console.log('Opening seriaport', portName)
+
   sp.on('open', () => {
-    console.log('open')
+    console.log('Opened seriaport', portName)
 
     sp.on('data', (data) => {
-      console.log('data received: ' + data)
+      console.log('Serial data received: ' + data)
       onData(null, data)
     })
   })
