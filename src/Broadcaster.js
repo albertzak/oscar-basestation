@@ -17,7 +17,6 @@ class Broadcaster {
 
   async broadcast (message) {
     return new Promise((resolve, reject) => {
-      console.log('[Broadcaster]', typeof message, message, 'as string: ' + message)
       this.socket.send(message, broadcastPort, broadcastAddress, (err) => {
         if (err) {
           reject(err)
