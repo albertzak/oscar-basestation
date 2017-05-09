@@ -1,0 +1,9 @@
+local_resinos:
+  app-name: oscar
+  build-triggers:
+    - Dockerfile: f5f1da5828af27e14210cc58c7b426b131a6c235cc34e8c375beec9dcb10bbd8
+  environment: []
+destination: /root/
+ignore:
+  - .git
+  - node_modules/

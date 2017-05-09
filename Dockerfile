@@ -4,8 +4,6 @@ COPY install /root/install
 
 RUN chmod +x ~/install/install.sh && ~/install/install.sh
 
-RUN apt-get -y update && apt-get install -y minicom
-
 WORKDIR /root/src
 
 # Copy only dependencies now to use cache when rebuilding
@@ -16,10 +14,11 @@ ENV NPM_CONFIG_LOGLEVEL=warn
 ENV NPM_CONFIG_COLOR=false
 RUN npm install
 
-COPY src .
-
 ENV INITSYSTEM=on
+COPY udevd.sh .
 RUN chmod +x /root/src/udevd.sh
 CMD ["/root/src/udevd.sh"]
+
+COPY src .
 
 ENTRYPOINT ["/root/src/node_modules/.bin/pm2-docker", "/root/src/start.js"]

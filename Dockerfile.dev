@@ -14,9 +14,11 @@ ENV NPM_CONFIG_LOGLEVEL=warn
 ENV NPM_CONFIG_COLOR=false
 RUN npm install
 
-COPY src .
+ENV INITSYSTEM=on
+COPY udevd.sh .
+RUN chmod +x /root/udevd.sh
+CMD ["/root/udevd.sh"]
 
-RUN chmod +x /root/src/udevd.sh
-CMD ["/root/src/udevd.sh"]
+COPY src .
 
 ENTRYPOINT ["/root/src/node_modules/.bin/pm2-docker", "/root/src/start.js"]

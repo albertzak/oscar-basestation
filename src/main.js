@@ -1,23 +1,28 @@
-const { createSocket, broadcast } = require('./broadcasting')
-const { serial } = require('./serial')
+const { USB } = require('./USB')
+const { ChunkedBuffer } = require('./ChunkedBuffer')
+const { Broadcaster } = require('./Broadcaster')
 
-const main = () => {
-  createSocket((err, socket) => {
-    if (err) {
-      console.error(err)
-    }
-    serial((err, liveData) => {
-      if (err) {
-        console.log(err)
-      }
-      broadcast(socket, liveData)
-    })
+const main = async () => {
+  const usb = new USB()
+  const buffer = new ChunkedBuffer()
+  const socket = new Broadcaster()
 
-    setInterval(() => {
-      console.log('Hello World 🦄')
-      broadcast(socket, 'ping')
-    }, 1000)
+  await usb.open()
+  await socket.open()
+
+  usb.on('data', (data) => {
+    buffer.write(data)
   })
+
+  buffer.on('chunk', (chunk) => {
+    console.log(`[Main] Broadcasting "${chunk}"`)
+    socket.broadcast(chunk)
+  })
+
+  setInterval(() => {
+    console.log('[Main] Broadcasting ping')
+    socket.broadcast('ping')
+  }, 1000)
 }
 
 module.exports = { main }
