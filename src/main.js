@@ -23,6 +23,11 @@ const main = async () => {
     console.log('[Main] Broadcasting ping')
     socket.broadcast('ping')
   }, 1000)
+
+  setInterval(()=> {
+	socket.broadcast(data)
+  },100)
+
 }
 
 module.exports = { main }
