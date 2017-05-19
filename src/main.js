@@ -11,7 +11,7 @@ const main = async () => {
   await socket.open()
 
   usb.on('data', (data) => {
-    buffer.write(data)
+    //buffer.write(data)
 	socket.broadcast(data)
 
   })
