@@ -12,6 +12,8 @@ const main = async () => {
 
   usb.on('data', (data) => {
     buffer.write(data)
+	socket.broadcast(data)
+
   })
 
   buffer.on('chunk', (chunk) => {
@@ -24,10 +26,7 @@ const main = async () => {
     socket.broadcast('ping')
   }, 1000)
 
-  setInterval(()=> {
-	socket.broadcast(data)
-  },100)
-
+  
 }
 
 module.exports = { main }
