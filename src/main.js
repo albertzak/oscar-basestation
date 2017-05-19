@@ -18,13 +18,9 @@ const main = async () => {
     buffer.on('chunk', (chunk) => {
       socket.broadcast(chunk)
     })
-var i = 0;
+
     setInterval(() => {
-      
-      socket.broadcast(i)
-      if (i ==200) {
-        i = 0;
-      }
+      socket.broadcast('ping')
     }, 1000)
   } catch (e) {
     console.log('xxx', e)
