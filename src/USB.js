@@ -8,7 +8,7 @@ class USB extends EventEmitter {
     this.serial = new SerialPort(port)
 
     this.serial.on('data', (data) => {
-      console.log(`[Serial] Data: ${data}`)
+      //console.log(`[Serial] Data: ${data}`)
       this.emit('data', data)
     })
 
