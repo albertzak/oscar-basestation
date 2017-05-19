@@ -22,8 +22,8 @@ const main = async () => {
   })
 
   setInterval(() => {
-    console.log('[Main] Broadcasting ping')
-    socket.broadcast('ping')
+    //console.log('[Main] Broadcasting ping')
+    //socket.broadcast('ping')
   }, 1000)
 
   
